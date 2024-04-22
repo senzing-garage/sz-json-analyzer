@@ -1,0 +1,1 @@
+# sz-file-analyzer errors
