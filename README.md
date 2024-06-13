@@ -36,7 +36,7 @@ optional arguments:
 
 The green "mapped" section shows all the attributes the Senzing config recognized with population and uniqueness percent with the top 10 most used values.
 
-The yellow "unmapped" section shows all the attributes the Sezning config did not recognize. This should only contain any attributes you specifically did not map.
+The yellow "unmapped" section shows all the attributes the Senzing config did not recognize. This should only contain any attributes you specifically did not map.
 
 The orange "warning" section shows observations you may not be aware of, such as low population or uniqueness percent of identifiers as well as incomplete features such as addresses without postal codes.
 
