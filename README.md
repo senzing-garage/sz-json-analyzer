@@ -33,4 +33,12 @@ optional arguments:
 
 ![sample_analysis](images/sample_analysis.jpg)
 
-The green "mapped" section shows all the fields the Senzing config recognized with population and uniqueness percent with the top 10 most used values.
+The green "mapped" section shows all the attributes the Senzing config recognized with population and uniqueness percent with the top 10 most used values.
+
+The yellow "unmapped" section shows all the attributes the Sezning config did not recognize. This should only contain any attributes you specifically did not map.
+
+The orange "warning" section shows observations you may not be aware of, such as low population or uniqueness percent of identifiers as well as incomplete features such as addresses without postal codes.
+
+There is also a blue "information" section showing minor observations such as only a few records have incomplete features, but for the most part they are complete.
+
+Finally, there may be a red "error" section which shows reasons your data will not load.  Such as missing data source code and bad json.
