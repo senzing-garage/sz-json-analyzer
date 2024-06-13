@@ -28,7 +28,8 @@ optional arguments:
                         the name of the input file
   -o OUTPUT_FILE, --output_file OUTPUT_FILE
                         optional name of the output file
-                        ```
+```
+
 ## Sample output
 
 ![sample_analysis](images/sample_analysis.jpg)
