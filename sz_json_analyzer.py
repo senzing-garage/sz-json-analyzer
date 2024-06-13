@@ -23,7 +23,7 @@ def get_config_data(config_file_name):
     # ignore cached file IO errors as just for convenience
     config_message = 'Access to Senzing instance needed to get current configuration data!'
     config_data = None
-    try: 
+    try:
         from senzing import G2Config, G2ConfigMgr
 
         iniParams = os.getenv("SENZING_ENGINE_CONFIGURATION_JSON")
@@ -43,7 +43,7 @@ def get_config_data(config_file_name):
         config_data['G2_CONFIG']['CFG_FTYPE'] = cfgData['G2_CONFIG']['CFG_FTYPE']
         config_message = 'Using current configuration data'
 
-        with suppress(Exception): 
+        with suppress(Exception):
             with open(config_file_name, 'w') as f:
                 json.dump(config_data, f, indent=4)
 
@@ -123,7 +123,7 @@ class SzJsonAnalyzer():
 
 
     def add_to_features(self, features, errors, parent, attr_name, attr_value):
-        if isinstance(attr_value, list) or isinstance(attr_value, dict):
+        if isinstance(attr_value, (list, dict)):
             errors.append(f'Expected integer or string for {attr_name}')
         else:
             attr_data = self.mapped_attribute[attr_name].copy()
@@ -225,7 +225,7 @@ class SzJsonAnalyzer():
 
         features_mapped = []
         attributes_mapped = []
-        for feature_key in features.keys():
+        for feature_key in features:
             parent, feature, label = feature_key.split('|')
             if feature in self.feature_stats:
                 self.feature_stats[feature]['count'] += 1
@@ -256,11 +256,11 @@ class SzJsonAnalyzer():
                 self.update_feature_stats(feature, self.label_to_attribute[feature], label)
                 populated_attr_list.append(self.label_to_attribute[feature])
 
-            if populated_attr_values: # capture the full feature 
+            if populated_attr_values: # capture the full feature
                 feature_desc = ' '.join(populated_attr_values)
                 if feature_desc not in self.feature_stats[feature]['values']:
                     self.feature_stats[feature]['values'][feature_desc] = 1
-                else:                
+                else:
                     self.feature_stats[feature]['values'][feature_desc] += 1
 
             attributes_mapped.extend(populated_attr_list)
@@ -322,8 +322,8 @@ class SzJsonAnalyzer():
     def get_report(self):
         table_headers = ['Category',
                          'Attribute',
-                         'Record Count', 
-                         'Record Percent', 
+                         'Record Count',
+                         'Record Percent',
                          'Unique Count',
                          'Unique Percent',
                          'Top Value1',
@@ -467,10 +467,10 @@ def format_pretty_table(table_rows):
     table_object.vertical_char = '\u2502'
     table_object.junction_char = '\u253C'
 
-    colors = {'MAPPED': '\033[38;5;70m', 
-              'UNMAPPED': '\033[38;5;178m', 
-              'ERROR': '\033[38;5;124m', 
-              'WARNING': '\033[38;5;202m', 
+    colors = {'MAPPED': '\033[38;5;70m',
+              'UNMAPPED': '\033[38;5;178m',
+              'ERROR': '\033[38;5;124m',
+              'WARNING': '\033[38;5;202m',
               'INFO': '\033[38;5;39m',
               'HEADER': '\033[38;5;242m',
               'DIM': '\033[02m',
@@ -498,7 +498,7 @@ def format_pretty_table(table_rows):
                 i = 2
                 while i < len(row):
                     row[i] = f"{colors['DIM']}{row[i]}{colors['RESET']}"
-                    i+=1 
+                    i+=1
             else:
                 row[1] = f"{colors[row[0]]}{row[1]}{colors['RESET']}"
 
@@ -527,7 +527,7 @@ def format_pretty_table(table_rows):
             table_object.align[field_name] = 'r'
         else:
             table_object.align[field_name] = 'l'
-    
+
     return table_object.get_string()
 
 #----------------------------------------
@@ -558,7 +558,7 @@ def signal_handler(signal, frame):
 
 #----------------------------------------
 if __name__ == "__main__":
-    shut_down = False   
+    shut_down = False
     signal.signal(signal.SIGINT, signal_handler)
 
     parser = argparse.ArgumentParser()
@@ -625,4 +625,3 @@ if __name__ == "__main__":
         print(report_table)
         print()
     sys.exit(0)
-

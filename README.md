@@ -31,6 +31,6 @@ optional arguments:
                         ```
 ## Sample output
 
-![sample analysis](images/sample_analysis.jpg)
+![sample_analysis](images/sample_analysis.jpg)
 
 The green "mapped" section shows all the fields the Senzing config recognized with population and uniqueness percent with the top 10 most used values.
