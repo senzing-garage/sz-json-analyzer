@@ -181,20 +181,21 @@ class SzJsonAnalyzer():
             if not input_data[attr_name]:
                 continue
             self.register_attribute(attr_name)
+            attr_value = str(input_data[attr_name])
 
             # its certainly a feature attribute
             if not self.mapped_attribute[attr_name].get('UNMAPPED'):
-                self.add_to_features(features, message_list, 'ROOT', attr_name, input_data[attr_name])
+                self.add_to_features(features, message_list, 'ROOT', attr_name, attr_value)
                 continue
 
             # its a certainly an unmapped attribute because its not a list
             if not isinstance(input_data[attr_name], list):
-                self.update_unmapped_stats(attr_name, str(input_data[attr_name]))
+                self.update_unmapped_stats(attr_name, str(attr_value))
                 continue
 
             # its certainly unmapped if its not a list of dictionaries
             if not isinstance(input_data[attr_name][0], dict):
-                self.update_unmapped_stats(attr_name, str(input_data[attr_name]))
+                self.update_unmapped_stats(attr_name, str(attr_value))
                 continue
 
             # hopefully its a sub-list of features
@@ -207,16 +208,17 @@ class SzJsonAnalyzer():
                     if not child_data[child_attr_name]:
                         continue
                     self.register_attribute(child_attr_name)
+                    child_value = str(child_data[child_attr_name])
 
                     if not self.mapped_attribute[child_attr_name].get('UNMAPPED'):
                         any_features = True
-                        self.add_to_features(features, message_list, f"{attr_name}[{child_instance}]", child_attr_name, child_data[child_attr_name])
+                        self.add_to_features(features, message_list, f"{attr_name}[{child_instance}]", child_attr_name, child_value)
                     else:
-                        unmapped_attributes.append([f"{attr_name}->{child_attr_name}", child_data[child_attr_name]])
+                        unmapped_attributes.append([f"{attr_name}->{child_attr_name}", child_value])
 
             # if no features, the whole list is unmapped
             if not any_features:
-                self.update_unmapped_stats(attr_name, str(input_data[attr_name]))
+                self.update_unmapped_stats(attr_name, attr_value)
             else:
                 for unmapped_attribute in unmapped_attributes:
                     self.update_unmapped_stats(unmapped_attribute[0], str(unmapped_attribute[1]))
