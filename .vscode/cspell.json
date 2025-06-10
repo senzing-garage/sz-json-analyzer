@@ -1,0 +1,55 @@
+{
+  // Version of the setting file.  Always 0.2
+  "version": "0.2",
+  // language - current active spelling language
+  "language": "en",
+  // words - list of words to be always considered correct
+  "words": [
+    "alnum",
+    "analysing",
+    "AREACODE",
+    "CAND",
+    "CCLA",
+    "CODEOWNER",
+    "Dockerfiles",
+    "DRLIC",
+    "DSRC",
+    "dyld",
+    "FCLASS",
+    "FELEM",
+    "FMXSR",
+    "ftype",
+    "GOPATH",
+    "ICLA",
+    "LATLONG",
+    "LIBPOSTAL",
+    "METAPHONE",
+    "mypy",
+    "NUMSTD",
+    "osarch",
+    "osdetect",
+    "OSTYPE",
+    "PLACEKEY",
+    "PREHASHED",
+    "prettytable",
+    "projectatomic",
+    "pydev",
+    "pylint",
+    "pytest",
+    "reclass",
+    "RTYPE",
+    "Senzing",
+    "shellcheck",
+    "simplifiable",
+    "stackoverflow",
+    "toplevel",
+    "WATCHLIST",
+    "WECHAT",
+    "ZOOMROOM"
+  ],
+  "ignorePaths": [
+    ".git/**",
+    ".gitignore",
+    ".mypy_cache/**"
+  ]
+}
