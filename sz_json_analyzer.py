@@ -114,13 +114,13 @@ class SzJsonAnalyzer:
             possible_label = attr_name[0 : attr_name.find("_")]
             possible_attr_name = attr_name[attr_name.find("_") + 1 :]
             if possible_attr_name in self.attribute_lookup:
-                attr_data = self.attribute_lookup[possible_attr_name]
+                attr_data = self.attribute_lookup[possible_attr_name].copy()
                 attr_data["LABEL"] = possible_label
             else:
                 possible_label = attr_name[attr_name.rfind("_") + 1 :]
                 possible_attr_name = attr_name[0 : attr_name.rfind("_")]
                 if possible_attr_name in self.attribute_lookup:
-                    attr_data = self.attribute_lookup[possible_attr_name]
+                    attr_data = self.attribute_lookup[possible_attr_name].copy()
                     attr_data["LABEL"] = possible_label
         if attr_data:
             self.mapped_attribute[attr_name] = attr_data
